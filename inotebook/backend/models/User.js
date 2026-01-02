@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const { Schema } = mongoose;
+
 
 const UserSchema = new Schema({
   name:{
@@ -12,12 +14,12 @@ const UserSchema = new Schema({
   },
   password:{
     type : String,
-    required: true,
-    unique: true
+    required: true
+    
   },
   date:{
     type : Date,
-    required: Date.now
+    default: Date.now
   },
 });
 
