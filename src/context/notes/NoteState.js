@@ -23,7 +23,7 @@ const NoteState=({children})=> {
     "__v": 0
   },
   {
-    "_id": "695e8f99cbf4843c7ae552ba",
+    "_id": "695e8f99cbf48543c7ae552ba",
     "user": "695d388b7b2248e5e74ff6f2",
     "title": "My title",
     "description": "Please Wake up Early",
@@ -32,7 +32,7 @@ const NoteState=({children})=> {
     "__v": 0
   },
   {
-    "_id": "695faaef6dfe3271d047744e",
+    "_id": "695faaef6fdfe3271d047744e",
     "user": "695d388b7b2248e5e74ff6f2",
     "title": "My title",
     "description": "Please Wake up Early",
@@ -41,7 +41,7 @@ const NoteState=({children})=> {
     "__v": 0
   },
   {
-    "_id": "695e8f99cbf4843c7ae552ba",
+    "_id": "695e8f99cbf4843cg7ae552ba",
     "user": "695d388b7b2248e5e74ff6f2",
     "title": "My title",
     "description": "Please Wake up Early",
@@ -50,7 +50,7 @@ const NoteState=({children})=> {
     "__v": 0
   },
   {
-    "_id": "695faaef6dfe3271d047744e",
+    "_id": "695faaef6dfe3j271d047744e",
     "user": "695d388b7b2248e5e74ff6f2",
     "title": "My title",
     "description": "Please Wake up Early",
@@ -59,7 +59,7 @@ const NoteState=({children})=> {
     "__v": 0
   },
   {
-    "_id": "695e8f99cbf4843c7ae552ba",
+    "_id": "695e8f599cbf4843c7ae552ba",
     "user": "695d388b7b2248e5e74ff6f2",
     "title": "My title",
     "description": "Please Wake up Early",
@@ -68,7 +68,7 @@ const NoteState=({children})=> {
     "__v": 0
   },
   {
-    "_id": "695faaef6dfe3271d047744e",
+    "_id": "695faaef6dfe3271d9047744e",
     "user": "695d388b7b2248e5e74ff6f2",
     "title": "My title",
     "description": "Please Wake up Early",
@@ -97,12 +97,14 @@ const [notes , setNotes]= useState(notesInitial);
   }
   
   //Delete a Note
-  const deleteNote = ()=>{
-
+  const deleteNote = (id)=>{
+    console.log("Deleting the note with id" + id);
+    const newNotes = notes.filter((note)=>{return note._id!==id});
+    setNotes(newNotes);
   }
 
   //Edit a Note
-    const editNote = ()=>{
+    const editNote = (id, title, description, tag)=>{
 
   }
     return (
