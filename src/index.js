@@ -10,14 +10,17 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+root.render( 
+  <><NoteState>
   <BrowserRouter>
-  <NoteState>
+  
   
     <App />
   
-  </NoteState>
+  
   </BrowserRouter>
+  </NoteState>
+  </>
 );
 
 // If you want to start measuring performance in your app, pass a function
