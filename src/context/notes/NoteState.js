@@ -27,6 +27,10 @@ const NoteState = ( props ) => {
    
   //Add notes
 const addNote = async (title, description, tag) => {
+   if (title.length < 3 || description.length < 5) {
+    console.error("Validation failed");
+    return;
+  }
   console.log("Sending:", { title, description, tag });
   const response = await fetch(`${host}/api/notes/addnotes`, {
     method: "POST",
@@ -53,7 +57,7 @@ const addNote = async (title, description, tag) => {
         "Content-Type": "application/json",
         "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjk1ZDM4OGI3YjIyNDhlNWU3NGZmNmYyIn0sImlhdCI6MTc2NzcxNzAwM30.XL_7VvlmflOy8ZNGWI2ztHdasoTgB5PJq7FI10qjYYs"
       },
-      body: JSON.stringify({ }),
+      
 
     });
     const json = await response.json();
@@ -67,7 +71,7 @@ const addNote = async (title, description, tag) => {
   const editNote = async (id, title, description, tag) => {
     //API Call
     const response = await fetch(`${host}/api/notes/updatenote/${id}`, {
-      method: "POST",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
         "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjk1ZDM4OGI3YjIyNDhlNWU3NGZmNmYyIn0sImlhdCI6MTc2NzcxNzAwM30.XL_7VvlmflOy8ZNGWI2ztHdasoTgB5PJq7FI10qjYYs"
@@ -77,17 +81,22 @@ const addNote = async (title, description, tag) => {
     });
     await response.json();
 
+    let newNotes = JSON.parse(JSON.stringify(notes))
     //Logic to edit in client
     for (let index = 0; index < notes.length; index++) {
 
-      const element = notes[index];
-      if (element._id === id) {
-        element.title = title;
-        element.description = description;
-        element.tag = tag;
-      }
+      
+      if (newNotes[index]._id === id) {
+      newNotes[index].title = title;
+      newNotes[index].description = description;
+      newNotes[index].tag = tag;
+      break;
+    }
+      
 
     }
+    console.log(newNotes);
+    setNotes(newNotes);
   }
   return (
     <NoteContext.Provider value={{ notes, addNote, deleteNote, editNote, getNotes }}>

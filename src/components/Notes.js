@@ -6,21 +6,23 @@ import AddNote from "./AddNote";
 
 const Notes = () => {
   const context = useContext(NoteContext);
-  const { notes, getNotes } = context;
+  const { notes, getNotes , editNote} = context;
   useEffect(() => {
     getNotes()
   }, [])
 
   const updateNote = (currentNote) => {
     ref.current.click();
-    setNote({etitle:currentNote.title, edescription: currentNote.edescription, etag:currentNote.etag})
+    setNote({id: currentNote._id , etitle:currentNote.title, edescription: currentNote.edescription, etag:currentNote.etag})
   }
  
   const ref = useRef(null);
-  const [note, setNote] = useState({ etitle: "", edescription: "", etag: "" })
+  const refClose = useRef(null);
+  const [note, setNote] = useState({ id: "", etitle: "", edescription: "", etag: "" })
    const handleClick = (e) => {
     console.log("Udating the note")
-        e.preventDefault();
+    editNote(note.id, note.etitle, note.edescription, note.etag);
+        refClose.current.click();
        
         setNote({ title: "", description: "", tag: "default" });
     };
@@ -61,7 +63,7 @@ const Notes = () => {
               </form>
             </div>
             <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button ref={refClose } type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
               <button onClick ={handleClick}type="button" className="btn btn-primary">Update Note</button>
             </div>
           </div>
